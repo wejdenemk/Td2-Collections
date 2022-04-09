@@ -1,0 +1,66 @@
+package pharmacie;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+
+public class DossierPharmacie {
+
+	private String nom_pharmacie ;
+	private HashMap<String , Patient > patients ;
+	
+	public DossierPharmacie( String n){
+	nom_pharmacie =n;
+	patients= new HashMap<String , Patient >();
+	}
+	
+	public void nouveauPatient( String nom , HashSet<String > ord ){
+		Patient p = new Patient(nom, ord);
+		patients.put(nom ,p);
+		}
+	
+	public boolean ajoutMedicament ( String nom , String m){
+		if(patients.containsKey(nom)) {
+			Patient p = new Patient("", null);
+			p=patients.get(nom);
+			p.ajoutMedicament(m);
+			return true;
+		}else {
+			return false;
+		}
+		}
+	
+	public void affichePatient( String nom ){
+		Patient p = new Patient("", null);
+		p=patients.get(nom);
+		p.affiche();
+		}
+	
+	public void affiche (){
+		System.out.print("Nom du phar: "+nom_pharmacie);
+		for(String i : patients.keySet()) {
+			System.out.print(" Key: "+ i+ " value: ");
+			for(Patient j: patients.values() ) {
+				System.out.print(j);
+			}
+		}
+		}
+	
+	public Collection <Patient > PatientAvecMedicament( String m){
+		Collection<Patient> C = new ArrayList<Patient>();
+		for(Patient i : patients.values()) {
+			if(i.contientMedicament(m)) {
+				C.add(i);
+			}}
+		return C ;
+		}
+	
+	public void enlevePatientOrdonnanceVide () {
+		for(Patient i : patients.values())
+			if(i.ordonnanceVide()) {
+				patients.remove(i);
+				System.out.print("Dossier a ete supprimer");
+			}
+		}
+}

@@ -1,0 +1,52 @@
+package pharmacie;
+
+import java.util.HashSet;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		
+		
+		Patient p2 = new Patient("patient2");
+		Patient p3 = new Patient("patient3");
+		Patient p4 = new Patient("patient4");
+		
+		
+		
+		p2.ajoutMedicament("med1");
+		p2.ajoutMedicament("med3");
+		
+		p3.ajoutMedicament("med4");
+		p3.ajoutMedicament("med5");
+		
+		p4.ajoutMedicament("med6");
+		p4.ajoutMedicament("med1");
+		
+	
+		p2.affiche();
+		p3.affiche();
+		p4.affiche();
+		
+		System.out.print("\n\n ******** \n\n");
+		
+		HashSet<String> list1 = new HashSet<String >();
+		list1.add("med1");
+		list1.add("vitamineE");
+		
+		HashSet<String> list2 = new HashSet<String >();
+		list2.add("med2");
+		list2.add("med3");
+		
+		HashSet<String> list3 = new HashSet<String >();
+		list3.add("vitamineE");
+		list3.add("med4");
+		
+		DossierPharmacie DP = new DossierPharmacie("Pharmacie1");
+		DP.nouveauPatient("patient1", list1);
+		DP.nouveauPatient("patient2", list2);
+		DP.nouveauPatient("patient3", list3);
+		
+		DP.affiche();
+	}
+	
+}
